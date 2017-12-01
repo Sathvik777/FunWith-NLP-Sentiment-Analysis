@@ -2,7 +2,7 @@ import nltk
 import random 
 # Importing existing data sets from nltk
 from nltk.corpus import movie_reviews
-
+import logic
 documents = []
 
 for category in movie_reviews.categories():
@@ -34,5 +34,4 @@ def find_features(data_set):
 featuresets = [(find_features(rev), category) for (rev, category) in documents]
 
 
-
-print(featuresets)
+naive_bayes_classifier = logic.naive_bayes(featuresets)
