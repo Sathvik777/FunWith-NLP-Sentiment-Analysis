@@ -11,11 +11,28 @@ for category in movie_reviews.categories():
 
 random.shuffle(documents)
 
-all_words =[]
+all_words = []
 
 for w in movie_reviews.words():
     all_words.append(w.lower())
 
 all_words = nltk.FreqDist(all_words)
 
-print(all_words.most_common(15))
+word_featues = list(all_words.keys())[:3000]
+
+
+# Adding features
+def find_features(data_set):
+    words = set(data_set)
+    features = {}
+    for w in word_featues:
+        features[w] = (w in words)
+
+    return features
+
+
+featuresets = [(find_features(rev), category) for (rev, category) in documents]
+
+
+
+print(featuresets)
