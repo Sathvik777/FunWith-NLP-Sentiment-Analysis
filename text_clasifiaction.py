@@ -33,5 +33,17 @@ def find_features(data_set):
 
 featuresets = [(find_features(rev), category) for (rev, category) in documents]
 
+training_set = featuresets[:1900]
+testing_set = featuresets[1900:]
 
-naive_bayes_classifier = logic.naive_bayes(featuresets)
+naive_bayes_classifier = logic.naive_bayes(training_set)
+
+mnb_classifier = logic.MNB_classifier(training_set)
+
+ber_classifier = logic.BernoulliNB_classifier(training_set)
+
+print("Classifier accuracy percent:",(nltk.classify.accuracy(naive_bayes_classifier, testing_set))*100)
+
+print("Classifier accuracy percent:",(nltk.classify.accuracy(mnb_classifier, testing_set))*100)
+
+print("Classifier accuracy percent:",(nltk.classify.accuracy(ber_classifier, testing_set))*100)
